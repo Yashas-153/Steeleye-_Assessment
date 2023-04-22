@@ -17,11 +17,19 @@ DOWNLOAD_PATH = "Downloads"
 
 def download_xml(url,destination_path,file_name=""):
     """
-    Downloades the xml file from the given link
+    Downloads the xml file from the given link
     
-    input: A string that contains the url of the link of the file to be downloaded
+    inputs
+    
+    url:
+        A string that contains the url of the link of the file to be downloaded
+    destination_path:
+        A string containing the location of the file to be downloaded
 
-    Returns: String of file name downloaded
+    Returns
+    
+    file_path:
+        String of file name downloaded
     
     """
     log.info("Requesting for the given link")
@@ -37,8 +45,8 @@ def download_xml(url,destination_path,file_name=""):
             log.info("Downloading the xml File")
             if file_name == "":
                 file_name = "xml_file_downloaded.xml"
-            path = os.path.join(destination_path,file_name)
-            open(path,'wb').write(response.content)
+            file_path = os.path.join(destination_path,file_name)
+            open(file_path,'wb').write(response.content)
             
         else:
             log.error("Error while downloading the xml file")
@@ -46,7 +54,7 @@ def download_xml(url,destination_path,file_name=""):
     except Exception as e:
         log.error(f"Error occurred {str(e)}")
 
-    return path
+    return file_path
 
 
 def download_zip_file(xml_file,destination_path):
@@ -54,11 +62,16 @@ def download_zip_file(xml_file,destination_path):
     """
     Finds the first link from the input XML file and downloades the zip file
 
-    input:
-        xml_file: A string containing the directory of XML file
-        destination_path: A string containing the  directory where the file should be saved after download 
+    inputs
+
+    xml_file:
+        A string containing the directory of XML file
+    destination_path: 
+        A string containing the  directory where the file should be saved after download 
     
-    returns:
+    Returns:
+    
+    file_path:
         A string containing the downloaded zip file name
 
     """
@@ -89,8 +102,8 @@ def download_zip_file(xml_file,destination_path):
                     response = requests.get(zip_file_link, allow_redirects=True)
                     if response.ok:
 
-                        path = os.path.join(destination_path,zip_file_name)
-                        open(path ,'wb').write(response.content)
+                        file_path = os.path.join(destination_path,zip_file_name)
+                        open(file_path ,'wb').write(response.content)
                         break;
                     else:
                         log.error("Error while downloading zip file")
@@ -102,7 +115,7 @@ def download_zip_file(xml_file,destination_path):
 
                 log.error("Link not found for the given file type")
 
-    return path   
+    return file_path   
     
 
 def unzip(zip_file, destination_path):
@@ -110,9 +123,15 @@ def unzip(zip_file, destination_path):
     """
     Extracts the files from zip file
 
-    input:
-        zip_file: A string containing the location of the zip file
-        destination_path: A string containing the directory to exract the files    
+    inputs
+        
+    zip_file:
+        A string containing the location of the zip file
+    destination_path:
+        A string containing the directory to exract the files 
+
+    Returns
+        None
     """
 
     if not os.path.exists(destination_path):
@@ -131,14 +150,19 @@ def unzip(zip_file, destination_path):
 def parse_xml_to_csv(xml_file,destination_path,file_name):
 
     """
-    Convert an XML file to a CSV file.
+    Converts an XML file to a CSV file
 
-    input:
-        xml_file: A string containing the path to the input XML file.
-        csv_file: A string containing the path to the output CSV file.
+    inputs:
+    
+    xml_file:
+        A string containing the path to the input XML file.
+    csv_file:
+        A string containing the path to the output CSV file.
 
     Returns:
-        None.
+    
+    csv_file: 
+        A string containing the location of parsed xml file
 
     """
     if not os.path.exists(destination_path):
@@ -205,7 +229,9 @@ def upload_to_s3(file_path):
     """
     Uploads the given file to AWS S3 
 
-    input:
+    inputs:
+    
+    file_path:
         A string containing the file path that to be uploaded
 
     returns:
