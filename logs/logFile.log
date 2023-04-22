@@ -1,0 +1,18 @@
+2023-04-22 15:38:37,004 : INFO : main : Initiated the program
+2023-04-22 15:38:37,006 : INFO : download_xml : Requesting for the given link
+2023-04-22 15:38:38,330 : INFO : download_xml : Downloading the xml File
+2023-04-22 15:38:38,333 : INFO : download_zip_file : Parsing the XML file for the link
+2023-04-22 15:38:38,336 : INFO : download_zip_file : Link found for the given file type
+2023-04-22 15:38:38,337 : INFO : download_zip_file : Downloading the zip file from the link
+2023-04-22 15:39:00,038 : INFO : unzip : Extracting the zip file
+2023-04-22 15:39:03,400 : INFO : unzip : Extraction finished
+2023-04-22 15:39:03,400 : INFO : parse_xml_to_csv : Creating an empty csv file
+2023-04-22 15:39:03,407 : INFO : parse_xml_to_csv : Loading the xml file
+2023-04-22 15:39:03,408 : INFO : parse_xml_to_csv : Parsing the XML file
+2023-04-22 15:39:03,409 : INFO : parse_xml_to_csv : Converting the xml file into csv file
+2023-04-22 15:40:22,809 : INFO : parse_xml_to_csv : Converstion completed
+2023-04-22 15:40:23,505 : INFO : upload_to_s3 : Connecting to S3
+2023-04-22 15:40:23,961 : INFO : upload_to_s3 : Creating a S3 bucket to store the file
+2023-04-22 15:40:30,377 : INFO : upload_to_s3 : Created a bucket sucessfully
+2023-04-22 15:40:30,377 : INFO : upload_to_s3 : Uploading the csv file to the bucket
+2023-04-22 15:40:49,600 : INFO : upload_to_s3 : Successfully uploaded the csv file
