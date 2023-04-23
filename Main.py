@@ -90,7 +90,6 @@ def download_zip_file(xml_file,destination_path):
             #log.info(f"file type is {str(file_type)}")
 
             if file_type == 'DLTINS':
-                print("Found File type")
                 log.info("Link found for the given file type")
 
                 zip_file_link = doc.find(".//str[@name='download_link']").text
@@ -147,7 +146,7 @@ def unzip(zip_file, destination_path):
     return zip_file.split('.')[0] + ".xml"
 
 
-def parse_xml_to_csv(xml_file,destination_path,file_name):
+def parse_xml_to_csv(xml_file,destination_path):
 
     """
     Converts an XML file to a CSV file
@@ -168,8 +167,8 @@ def parse_xml_to_csv(xml_file,destination_path,file_name):
     if not os.path.exists(destination_path):
         os.mkdir(destination_path)
 
-    csv_file = os.path.join(destination_path,file_name.split('.')[0] + ".csv")
-
+    csv_file = os.path.join(destination_path, xml_file.split("/")[-1].split(".")[0] + ".csv")
+    
     try:
         
         log.info("Creating an empty csv file")
@@ -276,7 +275,6 @@ def upload_to_s3(file_path):
     
         
 def main():
-    #log = logger.logger
     log.info("Initiated the program")
     
     xml_file = download_xml(XML_SOURCE_URL,DOWNLOAD_PATH)
@@ -284,12 +282,10 @@ def main():
     zip_file = download_zip_file(xml_file,DOWNLOAD_PATH)
 
     extracted_xml_file = unzip(zip_file,DOWNLOAD_PATH)
+    
+    csv_file = parse_xml_to_csv(extracted_xml_file,CSV_FOLDER_PATH)
 
-    file_name = extracted_xml_file.split("/")[-1]
-
-    csv_file = parse_xml_to_csv(extracted_xml_file,CSV_FOLDER_PATH,file_name)
-
-    upload_to_s3(csv_file)
+    #upload_to_s3(csv_file)
 
 if __name__ == '__main__':
     main()
