@@ -1,6 +1,6 @@
 import unittest
 import os
-from unittest.mock import MagicMock
+import boto3
 import Main
 
 #these are the pre-defined directories and other constants which are actual values used in the main function 
@@ -12,6 +12,7 @@ CSV_FOLDER_PATH = "csv_files"
 AWS_ACCESS__KEY_ID = "AHKEAFHANCAOAKFJ"                                 #this is a sample access_key_id of an AWS account
 AWS_ACCESS_SECRET_KEY = "gr0//5hlsfLRH69fjk/hftCvlsH6jaJowlQ1+"         #this is a sample secret access key of an AWS account
 BUCKET_NAME = "steeleyeassignment0"
+OBJECT_NAME = "Parsed_file.csv"
 
 #Only successfull testcases are considered in here
 class TestDownloadXml(unittest.TestCase):
@@ -69,12 +70,25 @@ class TestDownloadXml(unittest.TestCase):
 
 
     def test_upload_to_s3(self):
-        pass
+        
+        """
+        Function to perform unit testing for upload_to_s3 function in the Main.py file
+        """
+        file_name = "Parsed_file.csv"
+        
+        client = boto3.client('s3',
+            aws_access_key_id = 'AHKEAFHANCAOAKFJ',                            #this is a sample access_key_id of an AWS account
+            aws_secret_access_key = "gr0//5hlsfLRH69fjk/hftCvlsH6jaJowlQ1+",   #this is a sameple secret access key of an AWS account
+            region_name = 'ap-south-1'
+        )
 
-
+        objects = client.list_objects(Bucket = BUCKET_NAME)
+        
+        self.assertEqual(file_name,objects["Contents"][0]["Key"])
 
 
 if __name__ == '__main__' :
     unittest.main()
+
 
 
