@@ -1,3 +1,5 @@
+#this script is for performing unit testing for all the modules in the Main.py file
+
 import unittest
 import os
 import boto3

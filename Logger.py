@@ -1,3 +1,5 @@
+#this file creates a logger object to log the whole application
+
 import logging
 import os
 

@@ -1,3 +1,5 @@
+#this file is the main python file to perform the given requirements
+
 import xml.etree.ElementTree as etree
 import codecs
 import csv 
