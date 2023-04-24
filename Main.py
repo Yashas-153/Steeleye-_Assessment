@@ -287,7 +287,7 @@ def main():
     
     csv_file = parse_xml_to_csv(extracted_xml_file,CSV_FOLDER_PATH)
 
-    #upload_to_s3(csv_file)
+    upload_to_s3(csv_file)
 
 if __name__ == '__main__':
     main()
